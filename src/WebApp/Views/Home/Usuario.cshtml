@@ -1,0 +1,97 @@
+﻿@using Domain.Entities;
+@model List<Usuario>
+@{
+    ViewData["Title"] = "Cadastro de Usuários";
+    var Info = "@";
+
+
+}
+<h1>@ViewData["Title"]</h1>
+
+<form class="row g-3 needs-validation" novalidate>
+    <div class="col-md-4">
+        <div class="form-outline">
+            <input type="text" class="form-control" id="nome" value="Joao" required />
+            <label for="validationCustom01" class="form-label">Nome</label>
+            <div class="valid-feedback">Ok</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-outline">
+            <input type="text" class="form-control" id="sobreNome" value="Silva" required />
+            <label for="validationCustom02" class="form-label">Sobrenome</label>
+            <div class="valid-feedback">Ok!</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group form-outline">
+            <span class="input-group-text" id="inputGroupPrepend">@Info</span>
+            <input type="text" class="form-control" id="email" value="joao.silva@gmail.com" aria-describedby="inputGroupPrepend" required />
+            <label for="validationCustomUsername" class="form-label">Email</label>
+            <div class="invalid-feedback">Por favor insira um email.</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-outline">
+            <input type="text" class="form-control" id="idade" value="30" required />
+            <label for="validationCustom03" class="form-label">Idade</label>
+            <div class="invalid-feedback">Campo Obrigatório.</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-outline">
+            <input type="text" class="form-control" id="user" value="joao.silva" required />
+            <label for="validationCustom05" class="form-label">usuario</label>
+            <div class="invalid-feedback">Campo Obrigatório.</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-outline">
+            <input type="text" class="form-control" id="pass" value="123456789" required />
+            <label for="validationCustom05" class="form-label">Senha</label>
+            <div class="invalid-feedback">Campo Obrigatório.</div>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="button" onclick=" enviarForm();">Enviar</button>
+    </div>
+</form>
+<div class="col-12" style="margin-top:30px">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome/Sobrenome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Login</th>
+                <th scope="col">Senha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Nome - @item.Sobrenome</td>
+                    <td>@item.Email</td>
+                    <td>@item.Login</td>
+                    <td>*** @item.Senha.Substring(item.Senha.Length>3?3:item.Senha.Length,item.Senha.Length)</td>
+                </tr>
+
+            }
+
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="12">
+                        <div class="alert alert-primary" role="alert">
+                            Nenhum user cadastrado !
+                        </div>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
